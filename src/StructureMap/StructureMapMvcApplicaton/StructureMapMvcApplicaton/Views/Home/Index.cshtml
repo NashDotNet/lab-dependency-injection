@@ -1,0 +1,21 @@
+﻿@model StructureMapMvcApplicaton.Models.HomeViewModel
+
+@{
+    ViewBag.Title = "Products";
+}
+
+<h2>Products</h2>
+
+<table>
+    <tr>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.Products) {
+    <ul>
+		<li>@item</li>
+	</ul>
+}
+
+</table>
+
