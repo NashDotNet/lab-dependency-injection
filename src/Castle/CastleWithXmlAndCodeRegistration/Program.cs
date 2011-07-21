@@ -3,6 +3,7 @@ using Castle.Core.Resource;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Castle.Windsor.Configuration.Interpreters;
+using Castle.Windsor.Installer;
 
 namespace CastleWithXmlAndCodeRegistration
 {
@@ -11,17 +12,38 @@ namespace CastleWithXmlAndCodeRegistration
         private static void Main(string[] args)
         {
             //Note: look at app.config and see what IMenu registrations are being wired up there.
+            
+            // In Castle, the default implementation for a service is the first registered implementation.
 
-            // Our strategy here is to set the defaults in code, and let config override them.
+            IWindsorContainer container = ConfigureContainerSoThatXmlWins();
+            //IWindsorContainer container = ConfigureContainerSoThatCodeWins();
+            
+            var waiter = container.Resolve<IWaiter>();
+
+            Console.WriteLine(waiter.AnnounceTheSpecials());
+            Console.ReadKey();
+        }
+
+        private static IWindsorContainer ConfigureContainerSoThatCodeWins()
+        {
+            IWindsorContainer container = new WindsorContainer();
+
+            container.Register(Component.For<IWaiter>().ImplementedBy<Waiter>().Named("waiter"));
+            container.Register(Component.For<IMenu>().ImplementedBy<LunchMenu>().Named("menu"));
+
+            container.Install(Configuration.FromXml(new ConfigResource("castle")));
+            
+            return container;
+        }
+
+        private static IWindsorContainer ConfigureContainerSoThatXmlWins()
+        {
             IWindsorContainer container = new WindsorContainer(new XmlInterpreter(new ConfigResource("castle")));
 
             container.Register(Component.For<IWaiter>().ImplementedBy<Waiter>().Named("waiter"));
             container.Register(Component.For<IMenu>().ImplementedBy<LunchMenu>().Named("menu"));
 
-            var waiter = container.Resolve<IWaiter>();
-
-            Console.WriteLine(waiter.AnnounceTheSpecials());
-            Console.ReadKey();
+            return container;
         }
     }
 

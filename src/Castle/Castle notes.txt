@@ -1,0 +1,8 @@
+Docs are here:
+http://docs.castleproject.org/Windsor.MainPage.ashx
+
+Castle Windsor for StructureMap users:
+http://docs.castleproject.org/Windsor.Castle-Windsor-for-StructureMap-users.ashx
+
+Castle Windsor for Autofac users
+http://docs.castleproject.org/Windsor.Castle-Windsor-for-AutoFac-users.ashx
