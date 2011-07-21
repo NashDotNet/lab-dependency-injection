@@ -35,7 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="StructureMap">
-      <HintPath>..\..\..\..\lib\structuremap.2.6.2\lib\StructureMap.dll</HintPath>
+      <HintPath>..\..\..\..\lib\structuremap\StructureMap.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.WebPages" />

@@ -1,1 +1,1 @@
-Dependency injection examples for the NashDotNet lab.
+Dependency injection examples for NashDotNet's July 2011 lab.
