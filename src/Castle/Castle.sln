@@ -5,6 +5,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CastleWithXmlAndCodeRegistr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimplestThing", "SimplestThing\SimplestThing.csproj", "{9350F0E5-D203-4E05-8391-E73705ECB8D6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{68D1E542-0E1B-48EF-97AE-38646B7675FF}"
+	ProjectSection(SolutionItems) = preProject
+		Castle notes.txt = Castle notes.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleLifecycle", "SimpleLifecycle\SimpleLifecycle.csproj", "{C0FB785F-69F0-49A3-869C-67283521633D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -19,6 +26,10 @@ Global
 		{9350F0E5-D203-4E05-8391-E73705ECB8D6}.Debug|x86.Build.0 = Debug|x86
 		{9350F0E5-D203-4E05-8391-E73705ECB8D6}.Release|x86.ActiveCfg = Release|x86
 		{9350F0E5-D203-4E05-8391-E73705ECB8D6}.Release|x86.Build.0 = Release|x86
+		{C0FB785F-69F0-49A3-869C-67283521633D}.Debug|x86.ActiveCfg = Debug|x86
+		{C0FB785F-69F0-49A3-869C-67283521633D}.Debug|x86.Build.0 = Debug|x86
+		{C0FB785F-69F0-49A3-869C-67283521633D}.Release|x86.ActiveCfg = Release|x86
+		{C0FB785F-69F0-49A3-869C-67283521633D}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
