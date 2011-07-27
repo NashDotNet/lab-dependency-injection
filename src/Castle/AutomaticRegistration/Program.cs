@@ -2,7 +2,6 @@
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using Castle.Windsor.Installer;
 
 namespace AutomaticRegistration
 {
@@ -11,9 +10,9 @@ namespace AutomaticRegistration
         private static void Main(string[] args)
         {
             var container = new WindsorContainer();
-            container.Install(new BulkInstaller());
+            container.Install(new ViewModelInstaller());
 
-            var shell = container.Resolve<IPet>();
+            var shell = container.Resolve<IShellViewModel>();
 
             Console.WriteLine(shell.ToString());
 
@@ -21,113 +20,106 @@ namespace AutomaticRegistration
         }
     }
 
-    public class BulkInstaller : IWindsorInstaller
+    public class ViewModelInstaller : IWindsorInstaller
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            container.Register(AllTypes.FromThisAssembly());
+            container.Register(AllTypes.FromThisAssembly()
+                                   .Where(x => x.Name.EndsWith("ViewModel"))
+                                   .WithService.FirstInterface()
+                                   .Configure(c => c.LifeStyle.Transient)
+                );
         }
     }
-    //public interface IShellViewModel
-    //{
-    //    IDepartmentsViewModel Departments { get; }
-    //    IEmployeesViewModel Employees { get; }
-    //}
 
-    //public interface IDepartmentsViewModel
-    //{
-    //}
+    public interface IShellViewModel
+    {
+        IDepartmentsViewModel Departments { get; }
+        IEmployeesViewModel Employees { get; }
+    }
 
-    //public interface IEmployeesViewModel
-    //{
-    //    IEmployeeOfTheMonthViewModel EmployeeOfTheMonth { get; }
-        
-    //}
+    public interface IDepartmentsViewModel
+    {
+    }
 
-    //public interface IEmployeeOfTheMonthViewModel { }
+    public interface IEmployeesViewModel
+    {
+        IEmployeeOfTheMonthViewModel EmployeeOfTheMonth { get; }
+    }
+
+    public interface IEmployeeOfTheMonthViewModel
+    {
+    }
 
 
+    public class ShellViewModel : IShellViewModel
+    {
+        private readonly IDepartmentsViewModel _departments;
+        private readonly IEmployeesViewModel _employees;
 
-    //public class ShellViewModel : IShellViewModel
-    //{
-    //    private readonly IDepartmentsViewModel _departments;
-    //    private readonly IEmployeesViewModel _employees;
+        public ShellViewModel()
+        {
+        }
 
-    //    public ShellViewModel()
-    //    {
-    //    }
+        public ShellViewModel(IDepartmentsViewModel departments, IEmployeesViewModel employees)
+        {
+            _departments = departments;
+            _employees = employees;
+        }
 
-    //    public ShellViewModel(IDepartmentsViewModel departments, IEmployeesViewModel employees)
-    //    {
-    //        _departments = departments;
-    //        _employees = employees;
-    //    }
+        public IDepartmentsViewModel Departments
+        {
+            get { return _departments; }
+        }
 
-    //    public IDepartmentsViewModel Departments
-    //    {
-    //        get { return _departments; }
-    //    }
+        public IEmployeesViewModel Employees
+        {
+            get { return _employees; }
+        }
 
-    //    public IEmployeesViewModel Employees
-    //    {
-    //        get { return _employees; }
-    //    }
+        public override string ToString()
+        {
+            return String.Format("ShellViewModel({0}, {1})", Departments, Employees);
+        }
+    }
 
-    //    public override string ToString()
-    //    {
-    //        return String.Format("ShellViewModel({0}, {1})", Departments, Employees);
-    //    }
-    //}
+    public class DepartmentsViewModel : IDepartmentsViewModel
+    {
+        public override string ToString()
+        {
+            return "DepartmentsViewModel()";
+        }
+    }
 
-    //public class DepartmentsViewModel : IDepartmentsViewModel
-    //{
-    //    public DepartmentsViewModel()
-    //    {
-    //    }
+    public class EmployeesViewModel : IEmployeesViewModel
+    {
+        private readonly IEmployeeOfTheMonthViewModel _employeeOfTheMonth;
 
-    //    public override string ToString()
-    //    {
-    //        return "DepartmentsViewModel()";
-    //    }
-    //}
+        public EmployeesViewModel()
+        {
+        }
 
-    //public class EmployeesViewModel : IEmployeesViewModel
-    //{
-    //    private readonly IEmployeeOfTheMonthViewModel _employeeOfTheMonth;
+        public EmployeesViewModel(IEmployeeOfTheMonthViewModel employeeOfTheMonth)
+        {
+            _employeeOfTheMonth = employeeOfTheMonth;
+        }
 
-    //    public EmployeesViewModel()
-    //    {
-    //    }
+        public IEmployeeOfTheMonthViewModel EmployeeOfTheMonth
+        {
+            get { return _employeeOfTheMonth; }
+        }
 
-    //    public EmployeesViewModel(IEmployeeOfTheMonthViewModel employeeOfTheMonth)
-    //    {
-    //        _employeeOfTheMonth = employeeOfTheMonth;
-    //    }
+        public override string ToString()
+        {
+            return String.Format("EmployeesViewModel({0})", EmployeeOfTheMonth);
+        }
+    }
 
-    //    public IEmployeeOfTheMonthViewModel EmployeeOfTheMonth
-    //    {
-    //        get { return _employeeOfTheMonth; }
-    //    }
-
-    //    public override string ToString()
-    //    {
-    //        return String.Format("EmployeesViewModel({0})", EmployeeOfTheMonth);
-    //    }
-    //}
-
-    //public class EmployeeOfTheMonthViewModel : IEmployeeOfTheMonthViewModel
-    //{
-    //    public EmployeeOfTheMonthViewModel()
-    //    {
-    //    }
-
-    //    public override string ToString()
-    //    {
-    //        return "EmployeeOfTheMonthViewModel";
-    //    }
-    //}
-
-    
-  
-
+    public class EmployeeOfTheMonthViewModel : IEmployeeOfTheMonthViewModel
+    {
+        public override string ToString()
+        {
+            return "EmployeeOfTheMonthViewModel";
+        }
+    }
 }

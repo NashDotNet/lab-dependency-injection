@@ -15,8 +15,8 @@ namespace CastleWithXmlAndCodeRegistration
             
             // In Castle, the default implementation for a service is the first registered implementation.
 
-            IWindsorContainer container = ConfigureContainerSoThatXmlWins();
-            //IWindsorContainer container = ConfigureContainerSoThatCodeWins();
+            //IWindsorContainer container = ConfigureContainerSoThatXmlWins();
+            IWindsorContainer container = ConfigureContainerSoThatCodeWins();
             
             var waiter = container.Resolve<IWaiter>();
 

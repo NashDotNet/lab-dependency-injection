@@ -9,12 +9,19 @@ namespace SimplestThing
         static void Main(string[] args)
         {
             var container = new WindsorContainer();
-            container.Register(Component.For<IPet>().ImplementedBy<Cat>().Named("cat"));
-            container.Register(Component.For<IPet>().ImplementedBy<Dog>().Named("dog"));
+
+            container.Register(Component.For<IPet>()
+                .ImplementedBy<Dog>().Named("dog"));
+            
+            container.Register(Component.For<IPet>()
+                .ImplementedBy<Cat>().Named("cat"));
+
 
             var defaultPet = container.Resolve<IPet>();
             var cat = container.Resolve<IPet>("cat");
             var dog = container.Resolve<IPet>("dog");
+
+            var allPets = container.ResolveAll<IPet>();
 
             Console.WriteLine("Default IPet says " + defaultPet.Speak());
 
