@@ -16,6 +16,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutomaticRegistration", "Au
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerformanceSample", "PerformanceSample\PerformanceSample.csproj", "{97C72903-6C3E-4DA7-8540-489B5CFC510D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DelgateFactorySample", "DelegateFactorySample\DelgateFactorySample.csproj", "{6668DD0E-5242-483D-A78F-A67722AD13E2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -42,6 +44,10 @@ Global
 		{97C72903-6C3E-4DA7-8540-489B5CFC510D}.Debug|x86.Build.0 = Debug|x86
 		{97C72903-6C3E-4DA7-8540-489B5CFC510D}.Release|x86.ActiveCfg = Release|x86
 		{97C72903-6C3E-4DA7-8540-489B5CFC510D}.Release|x86.Build.0 = Release|x86
+		{6668DD0E-5242-483D-A78F-A67722AD13E2}.Debug|x86.ActiveCfg = Debug|x86
+		{6668DD0E-5242-483D-A78F-A67722AD13E2}.Debug|x86.Build.0 = Debug|x86
+		{6668DD0E-5242-483D-A78F-A67722AD13E2}.Release|x86.ActiveCfg = Release|x86
+		{6668DD0E-5242-483D-A78F-A67722AD13E2}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
