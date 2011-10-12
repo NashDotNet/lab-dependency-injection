@@ -51,7 +51,6 @@ namespace AutomaticRegistration
     {
     }
 
-
     public class ShellViewModel : IShellViewModel
     {
         private readonly IDepartmentsViewModel _departments;

@@ -16,7 +16,6 @@ namespace SimplestThing
             container.Register(Component.For<IPet>()
                 .ImplementedBy<Cat>().Named("cat"));
 
-
             var defaultPet = container.Resolve<IPet>();
             var cat = container.Resolve<IPet>("cat");
             var dog = container.Resolve<IPet>("dog");
